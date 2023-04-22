@@ -9,7 +9,7 @@ import { delay, first, tap } from 'rxjs';
 })
 export class CoursesService {
 
-  private readonly API = '/assets/courses.json';
+  private readonly API = 'api/courses';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -20,5 +20,11 @@ export class CoursesService {
       delay(50),
       tap(courses => console.log(courses))
     );
+  }
+
+  save(record: Course) {
+    console.log(record);
+    return this.httpClient.post<Course>(this.API, record).pipe(first());
+
   }
 }
